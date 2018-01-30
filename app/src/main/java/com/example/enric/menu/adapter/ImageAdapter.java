@@ -35,9 +35,9 @@ public class ImageAdapter extends BaseAdapter {
 			gridView = inflater.inflate(R.layout.mobile, null);
 
 			// set value into textview
-			TextView textView = (TextView) gridView
-					.findViewById(R.id.grid_item_label);
-			textView.setText(mobileValues[position]);
+			/*TextView textView = (TextView) gridView
+					.findViewById(R.id.grid_item_label);*/
+			/*textView.setText(mobileValues[position]);*/
 
 			// set image based on selected text
 			ImageView imageView = (ImageView) gridView
@@ -46,7 +46,7 @@ public class ImageAdapter extends BaseAdapter {
 			String mobile = mobileValues[position];
 
 			if (mobile.equals("Windows")) {
-				imageView.setImageResource(R.drawable.windows_logo);
+				imageView.setImageResource(R.drawable.ic_add_circle_black_48dp);
 			} else if (mobile.equals("iOS")) {
 				imageView.setImageResource(R.drawable.ios_logo);
 			} else if (mobile.equals("Blackberry")) {

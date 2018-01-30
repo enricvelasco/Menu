@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         gridView.setAdapter(new ImageAdapter(this, MOBILE_OS));
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 Toast.makeText(
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                                 .getText(), Toast.LENGTH_SHORT).show();
 
             }
-        });
+        });*/
 
     }
 
