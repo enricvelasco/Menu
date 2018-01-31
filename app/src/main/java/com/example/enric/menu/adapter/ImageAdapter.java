@@ -1,6 +1,8 @@
 package com.example.enric.menu.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,73 +10,75 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.enric.menu.MenuPrincipalItem;
 import com.example.enric.menu.R;
+
+import java.util.ArrayList;
 
 
 public class ImageAdapter extends BaseAdapter {
-	private Context context;
-	private final String[] mobileValues;
 
-	public ImageAdapter(Context context, String[] mobileValues) {
-		this.context = context;
-		this.mobileValues = mobileValues;
+	private final Context mContext;
+	private final ArrayList books;
+
+	// 1
+	public ImageAdapter(Context context, ArrayList<MenuPrincipalItem> books) {
+		this.mContext = context;
+		this.books = books;
 	}
 
-	public View getView(int position, View convertView, ViewGroup parent) {
-
-		LayoutInflater inflater = (LayoutInflater) context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-		View gridView;
-
-		if (convertView == null) {
-
-			gridView = new View(context);
-
-			// get layout from mobile.xml
-			gridView = inflater.inflate(R.layout.mobile, null);
-
-			// set value into textview
-			/*TextView textView = (TextView) gridView
-					.findViewById(R.id.grid_item_label);*/
-			/*textView.setText(mobileValues[position]);*/
-
-			// set image based on selected text
-			ImageView imageView = (ImageView) gridView
-					.findViewById(R.id.grid_item_image);
-
-			String mobile = mobileValues[position];
-
-			if (mobile.equals("Windows")) {
-				imageView.setImageResource(R.drawable.ic_add_circle_black_48dp);
-			} else if (mobile.equals("iOS")) {
-				imageView.setImageResource(R.drawable.ios_logo);
-			} else if (mobile.equals("Blackberry")) {
-				imageView.setImageResource(R.drawable.blackberry_logo);
-			} else {
-				imageView.setImageResource(R.drawable.android_logo);
-			}
-
-		} else {
-			gridView = (View) convertView;
-		}
-
-		return gridView;
-	}
+	// 2
 
 	@Override
 	public int getCount() {
-		return mobileValues.length;
+		return books.size();
 	}
 
+	/*@Override
+	public int getCount() {
+		return books.length;
+	}*/
+
+	// 3
+	@Override
+	public long getItemId(int position) {
+		return 0;
+	}
+
+	// 4
 	@Override
 	public Object getItem(int position) {
 		return null;
 	}
 
+	// 5
 	@Override
-	public long getItemId(int position) {
-		return 0;
+	public View getView(int position, View convertView, ViewGroup parent) {
+		// 1
+		final MenuPrincipalItem book = (MenuPrincipalItem) books.get(position);
+
+		// 2
+		if (convertView == null) {
+			final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+			convertView = layoutInflater.inflate(R.layout.mobile, null);
+		}
+
+		// 3
+		final ImageView imageView = (ImageView)convertView.findViewById(R.id.grid_item_image);
+		//final TextView nameTextView = (TextView)convertView.findViewById(R.id.textview_book_name);
+		//final TextView authorTextView = (TextView)convertView.findViewById(R.id.textview_book_author);
+		//final ImageView imageViewFavorite = (ImageView)convertView.findViewById(R.id.imageview_favorite);
+
+		// 4
+		//Bitmap myBitmap = BitmapFactory.decodeFile(book.getPathImage());
+		//ImageView imageView = (ImageView) convertView.findViewById(R.id.grid_item_image);
+		//imageView.setImageBitmap(myBitmap);
+		//imageView.setImageBitmap(BitmapFactory.decodeFile(book.getPathImage()));
+		imageView.setImageResource(book.getImagen());
+		//nameTextView.setText(mContext.getString(book.getName()));
+		//authorTextView.setText(mContext.getString(book.getAuthor()));
+
+		return convertView;
 	}
 
 }
