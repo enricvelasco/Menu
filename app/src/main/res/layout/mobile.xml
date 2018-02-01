@@ -5,8 +5,9 @@
     android:gravity="center">
 
     <FrameLayout
-        android:layout_width="175dp"
-        android:layout_height="175dp"
+        android:id="@+id/frameContenidoIconoMenu"
+        android:layout_width="360px"
+        android:layout_height="360px"
         android:background="@color/colorAccent">
 
         <ImageView

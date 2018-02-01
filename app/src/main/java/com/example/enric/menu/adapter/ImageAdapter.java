@@ -3,10 +3,13 @@ package com.example.enric.menu.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -64,7 +67,8 @@ public class ImageAdapter extends BaseAdapter {
 		}
 
 		// 3
-		final ImageView imageView = (ImageView)convertView.findViewById(R.id.grid_item_image);
+		FrameLayout frame = convertView.findViewById(R.id.frameContenidoIconoMenu);
+		final ImageView imageView = convertView.findViewById(R.id.grid_item_image);
 		//final TextView nameTextView = (TextView)convertView.findViewById(R.id.textview_book_name);
 		//final TextView authorTextView = (TextView)convertView.findViewById(R.id.textview_book_author);
 		//final ImageView imageViewFavorite = (ImageView)convertView.findViewById(R.id.imageview_favorite);
@@ -77,6 +81,13 @@ public class ImageAdapter extends BaseAdapter {
 		imageView.setImageResource(book.getImagen());
 		//nameTextView.setText(mContext.getString(book.getName()));
 		//authorTextView.setText(mContext.getString(book.getAuthor()));
+
+		frame.setBackgroundColor(Color.parseColor(book.getColor()));
+
+		ViewGroup.LayoutParams params = frame.getLayoutParams();
+		params.height = book.getTamanoHorizontal();
+		params.width = book.getTamanoHorizontal();
+		frame.setLayoutParams(params);
 
 		return convertView;
 	}

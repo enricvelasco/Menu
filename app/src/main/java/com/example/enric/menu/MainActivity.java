@@ -2,6 +2,7 @@ package com.example.enric.menu;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
@@ -22,18 +23,59 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Tamaño de la pantalla
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        int width = metrics.widthPixels; // ancho absoluto en pixels
+        int height = metrics.heightPixels; // alto absoluto en pixels
+        int densityDpi = metrics.densityDpi;
+        float xdpi = metrics.xdpi;
+        float ydpi = metrics.ydpi;
+
+        float densidadHorizontal = (width*160)/densityDpi;
+        float densidadVertical = (height*160)/densityDpi;
+
+        System.out.println("HORIZONTAL1 PIXELS-"+width);
+        System.out.println("VERTICAL2 PIXELS-"+height);
+        System.out.println("HORIZONTAL1-"+xdpi);
+        System.out.println("HORIZONTAL2-"+densidadHorizontal);
+        System.out.println("VERTICAL1-"+ydpi);
+        System.out.println("VERTICAL1-"+densidadVertical);
+
 
         //MenuPrincipalItem[] books = new ArrayList;
         ArrayList<MenuPrincipalItem> books = new ArrayList<MenuPrincipalItem>();
-        MenuPrincipalItem b1 = new MenuPrincipalItem("b1", R.drawable.ic_add_circle_black_48dp);
+        MenuPrincipalItem b1 = new MenuPrincipalItem("menu1", "#B8ECD6");
+        b1.setTamanoHorizontal(width/2);
+        //b1.setImagen(R.drawable.ic_add_circle_black_48dp);
         books.add(b1);
-        MenuPrincipalItem b2 = new MenuPrincipalItem("b1", R.drawable.icons8_advertisement_page);
+        MenuPrincipalItem b2 = new MenuPrincipalItem("menu2", "#B0CC99");
+        b2.setTamanoHorizontal(width/2);
+        //b2.setImagen(R.drawable.ic_add_circle_black_48dp);
         books.add(b2);
+        MenuPrincipalItem b3 = new MenuPrincipalItem("menu3","#292929");
+        b3.setTamanoHorizontal(width/2);
+        //b3.setImagen(R.drawable.ic_add_circle_black_48dp);
+        books.add(b3);
+        MenuPrincipalItem b4 = new MenuPrincipalItem("menu4", "#594F4E");
+        b4.setTamanoHorizontal(width/2);
+        //b4.setImagen(R.drawable.ic_add_circle_black_48dp);
+        books.add(b4);
+        MenuPrincipalItem b5 = new MenuPrincipalItem("menu5", "#B9121A");
+        b5.setTamanoHorizontal(width/2);
+        //b5.setImagen(R.drawable.ic_add_circle_black_48dp);
+        books.add(b5);
+        MenuPrincipalItem b6 = new MenuPrincipalItem("menu6","#F7F2B2");
+        b6.setTamanoHorizontal(width/2);
+        //b6.setImagen(R.drawable.ic_add_circle_black_48dp);
+        books.add(b6);
 
         gridView = (GridView) findViewById(R.id.gridView1);
 
         ImageAdapter booksAdapter = new ImageAdapter(this, books);
         gridView.setAdapter(booksAdapter);
+        gridView.setColumnWidth(width/2);
 
         //gridView.setAdapter(new ImageAdapter(this, MOBILE_OS));
 
@@ -47,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });*/
+
 
     }
 

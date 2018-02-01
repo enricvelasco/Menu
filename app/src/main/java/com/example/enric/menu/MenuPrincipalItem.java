@@ -1,5 +1,6 @@
 package com.example.enric.menu;
 
+import android.graphics.Color;
 import android.widget.ImageView;
 
 /**
@@ -9,11 +10,16 @@ import android.widget.ImageView;
 public class MenuPrincipalItem {
     String nombre;
     int imagen;
+    String color;
 
-    public MenuPrincipalItem(String nombre, int imagen) {
+    int tamanoHorizontal;
+
+    public MenuPrincipalItem(String nombre, String color) {
         this.nombre = nombre;
-        this.imagen = imagen;
+        //this.imagen = imagen;
+        this.color = color;
     }
+
 
     public String getNombre() {
         return nombre;
@@ -29,5 +35,21 @@ public class MenuPrincipalItem {
 
     public void setImagen(int imagen) {
         this.imagen = imagen;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public int getTamanoHorizontal() {
+        return tamanoHorizontal;
+    }
+
+    public void setTamanoHorizontal(int tamanoHorizontal) {
+        this.tamanoHorizontal = tamanoHorizontal;
     }
 }
