@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.enric.menu.MenuPrincipalItem;
@@ -67,8 +68,10 @@ public class ImageAdapter extends BaseAdapter {
 		}
 
 		// 3
-		FrameLayout frame = convertView.findViewById(R.id.frameContenidoIconoMenu);
+		RelativeLayout frame = convertView.findViewById(R.id.frameContenidoIconoMenu);
 		final ImageView imageView = convertView.findViewById(R.id.grid_item_image);
+
+		TextView nombreMenu = convertView.findViewById(R.id.idNombreMenu);
 		//final TextView nameTextView = (TextView)convertView.findViewById(R.id.textview_book_name);
 		//final TextView authorTextView = (TextView)convertView.findViewById(R.id.textview_book_author);
 		//final ImageView imageViewFavorite = (ImageView)convertView.findViewById(R.id.imageview_favorite);
@@ -88,6 +91,8 @@ public class ImageAdapter extends BaseAdapter {
 		params.height = book.getTamanoHorizontal();
 		params.width = book.getTamanoHorizontal();
 		frame.setLayoutParams(params);
+
+		nombreMenu.setText(book.getNombre());
 
 		return convertView;
 	}
