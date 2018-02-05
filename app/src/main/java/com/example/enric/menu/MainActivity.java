@@ -6,10 +6,23 @@ import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
+import android.widget.TextView;
 
-import com.example.enric.menu.adapter.ImageAdapter;
+
+import com.example.enric.menu.MenuPrincipal.MenuPrincipalAdapter.ImageAdapter;
+import com.example.enric.menu.MenuPrincipal.MenuPrincipalConectionInterface;
+import com.example.enric.menu.MenuPrincipal.MenuPrincipalItem;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -113,5 +126,50 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void connectionServer(){
+        System.out.println("DETECTA EL CLICK");
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.1.102:8080/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        MenuPrincipalConectionInterface gerritAPI = retrofit.create(MenuPrincipalConectionInterface.class);
+        Call<List<MenuPrincipalItem>> call = gerritAPI.getMenusPrincipales();
+        call.enqueue(new Callback<List<MenuPrincipalItem>>() {
+            @Override
+            public void onResponse(Call<List<MenuPrincipalItem>> call, Response<List<MenuPrincipalItem>> response) {
+                        /*final TextView textView = (TextView) findViewById(R.id.textView);
+                        textView.setText(response.body().toString());*/
+                //final TextView textView = (TextView) findViewById(R.id.textView);
+                if(response.isSuccessful()) {
+                    List<MenuPrincipalItem> menusPrincipales = response.body();
+                    System.out.println("RESPONSE 1"+response.body());
+                    for (MenuPrincipalItem temp : menusPrincipales) {
+                        System.out.println("MENU NOMBRE: "+temp.getNombre());
+                    }
+                    String json = new Gson().toJson(menusPrincipales);
+                    System.out.println("RESULTADO MENUS: "+json);
+                    //textView.setText(json);
+
+                    //changesList.forEach(change -> System.out.println(change.subject));
+                } else {
+                    System.out.println("RESPONSE 2");
+                    System.out.println(response.errorBody());
+                    System.out.println(response);
+                }
+
+            }
+            @Override
+            public void onFailure(Call<List<MenuPrincipalItem>> call, Throwable t) {
+                //final TextView textView = (TextView) findViewById(R.id.textView);
+                System.out.println("Something went wrong: " + t.getMessage());
+                //textView.setText("Something went wrong: " + t.getMessage());
+            }
+        });
     }
 }
