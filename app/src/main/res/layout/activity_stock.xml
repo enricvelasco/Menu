@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.enric.menu.activities.stock.StockActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <!--android.support.design.widget.AppBarLayout
         android:id="@+id/idToolBarStock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
-    </android.support.design.widget.AppBarLayout>
+    </android.support.design.widget.AppBarLayout-->
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,8 +27,9 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="507dp"
-            tools:layout_editor_absoluteY="59dp">
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteY="59dp"
+            tools:ignore="MissingConstraints">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -36,14 +37,40 @@
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="59dp">
 
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/button"
+                    android:layout_alignBottom="@+id/button"
+                    android:layout_toEndOf="@+id/button"
+                    android:onClick="closeScan"
+                    android:text="CLOSE"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="148dp"
+                    tools:layout_editor_absoluteY="307dp" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/idContenidoInfo"
+                    android:layout_marginStart="99dp"
+                    android:layout_marginTop="15dp"
+                    android:onClick="startScan"
+                    android:text="Button"
+                    tools:layout_editor_absoluteX="148dp"
+                    tools:layout_editor_absoluteY="216dp" />
+
                 <FrameLayout
-                    android:id="@+id/idContenidoCamaraScan"
+                    android:id="@+id/idContenidoInfo"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true">
+                    android:background="@android:color/holo_green_dark">
 
                 </FrameLayout>
+
             </RelativeLayout>
         </FrameLayout>
 
