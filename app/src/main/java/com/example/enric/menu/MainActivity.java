@@ -1,12 +1,14 @@
 package com.example.enric.menu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
 
 
 import com.example.enric.menu.MenuPrincipal.MenuPrincipalAdapter.ImageAdapter;
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //MenuPrincipalItem[] books = new ArrayList;
-        ArrayList<MenuPrincipalItem> books = new ArrayList<MenuPrincipalItem>();
+        final ArrayList<MenuPrincipalItem> books = new ArrayList<MenuPrincipalItem>();
         MenuPrincipalItem b1 = new MenuPrincipalItem("POS", "#B8ECD6");
         b1.setTamanoHorizontal(width/2);
         b1.setImagen(R.drawable.menu_pos_cash_register);
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         MenuPrincipalItem b4 = new MenuPrincipalItem("Stock", "#594F4E");
         b4.setTamanoHorizontal(width/2);
         b4.setImagen(R.drawable.menu_stock_hangar);
+        b4.setNombreActivity("StockActivity");
         books.add(b4);
         MenuPrincipalItem b5 = new MenuPrincipalItem("Elaborator", "#B9121A");
         b5.setTamanoHorizontal(width/2);
@@ -102,6 +105,23 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });*/
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //String val = values[i]; // arg2 is the index of item
+                MenuPrincipalItem valor = books.get(i);
+                System.out.println("He clicado sobre: "+valor.getNombre());
+                Class ourClass  = null;
+                try {
+                    ourClass = Class.forName("com.example.enric.menu.activities."+valor.getNombre().toLowerCase()+"."+valor.getNombreActivity());
+                    Intent intent = new Intent(MainActivity.this, ourClass);
+                    startActivity(intent);
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                    System.out.println("NO HAY ACTIVITY ASIGNADO PARA ESTE MENU: "+valor.getNombre());
+                }
+            }
+        });
 
 
     }

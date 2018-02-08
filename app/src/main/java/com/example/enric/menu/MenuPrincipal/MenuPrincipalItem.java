@@ -10,6 +10,7 @@ public class MenuPrincipalItem {
     private String nombre;
     private int imagen;
     private String color;
+    private String nombreActivity;
 
     private int tamanoHorizontal;
 
@@ -60,5 +61,13 @@ public class MenuPrincipalItem {
 
     public void setSubmenus(ArrayList<MenuPrincipalItem> submenus) {
         this.submenus = submenus;
+    }
+
+    public String getNombreActivity() {
+        return nombreActivity;
+    }
+
+    public void setNombreActivity(String nombreActivity) {
+        this.nombreActivity = nombreActivity;
     }
 }
